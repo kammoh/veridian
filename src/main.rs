@@ -1,5 +1,4 @@
 #[allow(unused)]
 mod symbol;
 
-fn main() {
-}
+fn main() {}

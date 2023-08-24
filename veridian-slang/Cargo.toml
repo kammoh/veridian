@@ -9,7 +9,7 @@ edition = "2018"
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.58.1"
+bindgen = "0.66.1"
 cc = { version = "1.0.68", features = ["parallel"] }
 reqwest = { version = "0.11.3", features = ["blocking"] }
 flate2 = "1.0.20"
@@ -17,4 +17,4 @@ tar = "0.4.35"
 
 [dev-dependencies]
 tempdir = "0.3.7"
-serial_test = "0.5.1"
+serial_test = "2.0.0"

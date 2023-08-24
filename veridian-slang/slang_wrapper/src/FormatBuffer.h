@@ -29,7 +29,7 @@ public:
             fmt::format_to(buf, format, std::forward<Args>(args)...);
         }
         else {
-            fmt::format_to(fmt::detail::buffer_appender(buf), style, format,
+            fmt::format_to(fmt::detail::buffer_appender<char>(buf), style, format,
                            std::forward<Args>(args)...);
         }
     }

@@ -8,13 +8,17 @@
 
 #include <functional>
 #include <string>
+#include <string_view>
 
 #include "slang/diagnostics/DiagnosticClient.h"
+#include "slang/ast/Symbol.h"
+
+using slang::ast::Symbol;
 
 namespace slang {
 
 class FormatBuffer;
-class Symbol;
+// class Symbol;
 
 class BasicClient : public DiagnosticClient {
 public:
@@ -44,7 +48,7 @@ private:
     static SymbolPathCB defaultSymbolPathCB;
 
     void formatDiag(SourceLocation loc, DiagnosticSeverity severity,
-                    string_view message, string_view optionName);
+                    std::string_view message, std::string_view optionName);
 };
 
 } // namespace slang

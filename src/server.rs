@@ -194,7 +194,7 @@ impl LanguageServer for Backend {
                     .parse_and_push_temp_spec(&conf.log_level.to_string())
                     .map_err(|e| Error {
                         code: ErrorCode::InvalidParams,
-                        message: e.to_string(),
+                        message: std::borrow::Cow::from(e.to_string()),
                         data: None,
                     })?;
             }

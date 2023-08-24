@@ -1,16 +1,21 @@
 #include "BasicClient.h"
 #include "slang_wrapper.h"
 #include <iostream>
-#include <slang/compilation/Compilation.h>
+#include <slang/ast/Compilation.h>
 #include <slang/diagnostics/DiagnosticClient.h>
 #include <slang/diagnostics/DiagnosticEngine.h>
 #include <slang/diagnostics/Diagnostics.h>
 #include <slang/parsing/Preprocessor.h>
-#include <slang/types/TypePrinter.h>
+#include <slang/ast/types/TypePrinter.h>
 #include <slang/syntax/SyntaxTree.h>
 #include <slang/text/SourceManager.h>
+#include <slang/util/Bag.h>
+
 
 using namespace slang;
+
+using slang::ast::Compilation;
+using slang::syntax::SyntaxTree;
 
 char* compile_source(const char* name, const char* text) {
     Bag options;
@@ -40,7 +45,7 @@ char* compile_source(const char* name, const char* text) {
 char* compile_path(const char* path) {
     Bag options;
     SourceManager sm;
-    SourceBuffer buffer = sm.readSource(path);
+    SourceBuffer buffer = sm.readSource(path, /* library */ nullptr).value();
 
     Compilation compilation(options);
 
@@ -96,7 +101,7 @@ char* compile_paths(const char** paths, unsigned int num_paths) {
 
     std::vector<SourceBuffer> buffers;
     for (unsigned int i = 0; i < num_paths; i++) {
-        buffers.push_back(sm.readSource(paths[i]));
+        buffers.push_back(sm.readSource(paths[i], nullptr).value());
     }
 
     compilation.addSyntaxTree(SyntaxTree::fromBuffers(buffers, sm, options));
